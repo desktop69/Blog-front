@@ -1,0 +1,58 @@
+<!-- crate new dialoge for put request ? -->
+<p-dialog class='custom-close-button' header="Update candidature" [(visible)]="displayModal" [modal]="true"
+    [style]="{height :'30vw',width:'55vw'}" [baseZIndex]="10000" [draggable]="true" [resizable]="true"
+    [closable]="false">
+    <!--  put ur conetent here   -->
+    <div class="container" #container>
+        <div class="container">
+            <!-- begin card-->
+            <div class="p-mb-5 mt-5">
+                <div class="grid mt-5">
+
+                    <div class="container">
+
+                        <div class="row">
+                            <div class="col-md-6" *ngIf="app_obj">
+                                <label for="title">Title</label>
+                                <input type="text" id="title" [(ngModel)]="app_obj.title" name="title" pInputText />
+                            </div>
+                            
+                            <div class="col-md-6" *ngIf="app_obj">
+                                <label for="content">content</label>
+                                <input type="text" id="content"  [(ngModel)]="app_obj.content" name="content"
+                                  pInputText />
+                              </div>
+                            <div class="col-md-6" *ngIf="app_obj">
+                                <label for="CreatedAt">CreatedAt</label>
+                                <input type="text" id="CreatedAt" [disabled]="true" [(ngModel)]="app_obj.CreatedAt" name="CreatedAt"
+                                  pInputText />
+                              </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!--end of card -->
+        </div>
+    </div>
+    <ng-template pTemplate="footer">
+        <button pButton pRipple icon="pi pi-times" (click)="closeModal()" label="No"
+            class="p-button-outlined p-button-rounded p-button-secondary blue-hover"></button>
+        <button pButton pRipple icon="pi pi-check" (click)="onSubmit()" label="Save"
+            class="p-button-outlined p-button-rounded p-button-secondary blue-hover"></button>
+    </ng-template>
+</p-dialog>
+
+
+<p>update-article works!</p>
+<p-dialog header="Are you sure you want to close this window?" [(visible)]="displayPosition" [modal]="true"
+    [style]="{width: '20vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+    <p> Your changes will be lost if you leave without saving.</p>
+    <ng-template pTemplate="footer">
+        <button pButton pRipple icon="pi pi-times" (click)="displayPosition=false" label="No"
+            class="p-button-outlined p-button-rounded p-button-secondary blue-hover"></button>
+        <button pButton pRipple icon="pi pi-check" (click)="closeAllModals()" label="Yes"
+            class="p-button-outlined p-button-rounded p-button-secondary blue-hover"></button>
+    </ng-template>
+</p-dialog>

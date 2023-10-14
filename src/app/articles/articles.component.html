@@ -1,0 +1,49 @@
+<div class="card">
+    <p-toolbar styleClass="p-mb-4">
+        <ng-template pTemplate="left">
+            <h2><b>Manage Articles</b></h2>
+        </ng-template>
+
+    </p-toolbar>
+
+
+    <p-table #dt [value]="Articles" [rows]="10" [paginator]="true" [globalFilterFields]="['title', ]" [rowHover]="true"
+        dataKey="_id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [showCurrentPageReport]="true">
+        <ng-template pTemplate="caption">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                <h4 class="p-m-0"><b>List Articles</b></h4>
+                <span class="p-input-icon-left mt-3">
+                    <input pInputText type="text" (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+                        placeholder="Global Search" />
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="title">title <p-sortIcon field="title"></p-sortIcon></th>
+                <th pSortableColumn="content">content <p-sortIcon field="content"></p-sortIcon></th>
+
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-Articles>
+            <tr>
+                <td>{{Articles.title}}</td>
+                <td>{{Articles.content}}</td>
+                <p-button icon="pi pi-trash" styleClass="p-button-danger   " [disabled]="!Articles"
+                    (click)="OnDeleteArticle(Articles._id)"></p-button>
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-info m-2"
+                    (click)="openUpdateModal(Articles)"></button>
+
+
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                In total there are {{Articles ? Articles.length : 0 }} Articles.
+            </div>
+        </ng-template>
+    </p-table>
+</div>
+<p-toast></p-toast>
+<app-update-article></app-update-article>
