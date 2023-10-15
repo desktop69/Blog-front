@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Article } from '../models/Article.model';
 import { ArticleService } from '../services/article.service';
+import { CategoryService } from '../services/category.service';
+import { Category } from '../models/Category.model';
+
 
 @Component({
   selector: 'app-update-article',
@@ -12,14 +15,21 @@ export class UpdateArticleComponent implements OnInit {
   displayModal!: boolean;
   displayPosition!: boolean;
   position!: string;
-  constructor(private services: ArticleService) { }
+  categories!: Category[];
+  constructor(private services: ArticleService,
+    
+    private categoryService: CategoryService,) { }
 
 
   ngOnInit(): void {
+    
   }
   loadDataforUpdate(data: Article) {
     this.app_obj = data;
-    console.log("hey from update component child: " + this.app_obj.title);
+    
+      
+    // console.log("hey from update component child: " + this.app_obj.title);
+    this.GetAllCategory();
     this.showModalDialog();
     // console.log("App Obj Status:", this.app_obj.status);
   }
@@ -48,10 +58,18 @@ export class UpdateArticleComponent implements OnInit {
     }
     this.closeAllModals()
   }
-  updateArticle(id : string, article: Article) {
+  updateArticle(id: string, article: Article) {
     this.services.updateArticle(id, article).subscribe(data => {
       console.log("data updated", data);
     })
   }
+  GetAllCategory() {
+    this.categoryService.getAll().subscribe((res) => {
+      console.log(res);
+      this.categories = res;
+
+    })
+  }
+
 
 }

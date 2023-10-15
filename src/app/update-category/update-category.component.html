@@ -1,5 +1,5 @@
 <!-- crate new dialoge for put request ? -->
-<p-dialog class='custom-close-button' header="Add Article" [(visible)]="displayModal" [modal]="true"
+<p-dialog class='custom-close-button' header="Update candidature" [(visible)]="displayModal" [modal]="true"
     [style]="{height :'30vw',width:'55vw'}" [baseZIndex]="10000" [draggable]="true" [resizable]="true"
     [closable]="false">
     <!--  put ur conetent here   -->
@@ -12,27 +12,12 @@
                     <div class="container">
 
                         <div class="row">
-                            <form [formGroup]="articleForm" (ngSubmit)="onSubmit()">
-
-
-                                <div class="row">
-                                    <div class="col">
-                                        <label for="title">Title</label> <br>
-                                        <input id="title" type="text" pInputText formControlName="title" />
-                                    </div>
-                                    <div class="col">
-                                        <label for="category">Category</label>
-                                        <p-dropdown id="category" [options]="categories" formControlName="category"
-                                            [optionLabel]="'name'"></p-dropdown>
-                                    </div>
-                                </div>
-                                <div class="col-4 mt-5">
-                                    <label for="content">Content</label>
-                                    <textarea id="content" pInputTextarea formControlName="content"></textarea>
-
-                                </div>
-
-                            </form>
+                            <div class="col-md-6" *ngIf="app_obj">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" [(ngModel)]="app_obj.name" name="title" pInputText />
+                            </div>
+                            
+                     
                         </div>
 
                     </div>
@@ -49,7 +34,6 @@
             class="p-button-outlined p-button-rounded p-button-secondary blue-hover"></button>
     </ng-template>
 </p-dialog>
-
 
 
 <p-dialog header="Are you sure you want to close this window?" [(visible)]="displayPosition" [modal]="true"

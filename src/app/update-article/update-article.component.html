@@ -1,5 +1,5 @@
 <!-- crate new dialoge for put request ? -->
-<p-dialog class='custom-close-button' header="Update candidature" [(visible)]="displayModal" [modal]="true"
+<p-dialog class='custom-close-button' header="Update Article" [(visible)]="displayModal" [modal]="true"
     [style]="{height :'30vw',width:'55vw'}" [baseZIndex]="10000" [draggable]="true" [resizable]="true"
     [closable]="false">
     <!--  put ur conetent here   -->
@@ -12,21 +12,30 @@
                     <div class="container">
 
                         <div class="row">
-                            <div class="col-md-6" *ngIf="app_obj">
-                                <label for="title">Title</label>
-                                <input type="text" id="title" [(ngModel)]="app_obj.title" name="title" pInputText />
+                            <div class="col" *ngIf="app_obj">
+                                <label for="title">Title</label><br>
+                                <input class="mt-2" type="text" id="title" [(ngModel)]="app_obj.title" name="title"
+                                    pInputText />
                             </div>
-                            
-                            <div class="col-md-6" *ngIf="app_obj">
-                                <label for="content">content</label>
-                                <input type="text" id="content"  [(ngModel)]="app_obj.content" name="content"
-                                  pInputText />
-                              </div>
-                            <div class="col-md-6" *ngIf="app_obj">
-                                <label for="CreatedAt">CreatedAt</label>
-                                <input type="text" id="CreatedAt" [disabled]="true" [(ngModel)]="app_obj.CreatedAt" name="CreatedAt"
-                                  pInputText />
-                              </div>
+
+                            <div class="col" *ngIf="app_obj">
+                                <label for="content">Content</label><br>
+                                <input class="mt-2" type="text" id="content" [(ngModel)]="app_obj.content"
+                                    name="content" pInputText />
+                            </div>
+                            <div class="row mt-5">
+                                <div class="col" *ngIf="app_obj">
+                                    <label for="CreatedAt">CreatedAt</label><br>
+                                    <input class="mt-2" type="text" id="CreatedAt" [disabled]="true"
+                                        [(ngModel)]="app_obj.CreatedAt " name="CreatedAt" pInputText />
+                                </div>
+                                <div class="col" *ngIf="app_obj">
+                                    <label class="mb-2" for="category">Category</label><br>
+                                    <p-dropdown [options]="categories" [(ngModel)]="app_obj.category" optionLabel="name"
+                                        name="category" appendTo="body"></p-dropdown>
+                                </div>
+                            </div>
+
                         </div>
 
                     </div>
@@ -44,8 +53,6 @@
     </ng-template>
 </p-dialog>
 
-
-<p>update-article works!</p>
 <p-dialog header="Are you sure you want to close this window?" [(visible)]="displayPosition" [modal]="true"
     [style]="{width: '20vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
     <p> Your changes will be lost if you leave without saving.</p>

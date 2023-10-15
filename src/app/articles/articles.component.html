@@ -1,8 +1,12 @@
+<app-add-article></app-add-article>
 <div class="card">
     <p-toolbar styleClass="p-mb-4">
         <ng-template pTemplate="left">
-            <h2><b>Manage Articles</b></h2>
+            <p-button label="Add Article" icon="pi pi-plus" iconPos="right" (click)="openAddModal()"> </p-button>
         </ng-template>
+        <div class="p-2 ">
+            <h3><b>Manage Articles</b></h3>
+        </div>
 
     </p-toolbar>
 
@@ -21,18 +25,27 @@
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
-                <th pSortableColumn="title">title <p-sortIcon field="title"></p-sortIcon></th>
-                <th pSortableColumn="content">content <p-sortIcon field="content"></p-sortIcon></th>
-
+                <th pSortableColumn="title">Title <p-sortIcon field="title"></p-sortIcon></th>
+                <th pSortableColumn="content">Content <p-sortIcon field="content"></p-sortIcon></th>
+                <th pSortableColumn="category">Category <p-sortIcon field="category"></p-sortIcon></th>
+                <th pSortableColumn="CreatedAt">CreatedAt <p-sortIcon field="CreatedAt"></p-sortIcon></th>
+                <th pSortableColumn="Delete">Delete </th>
+                <th pSortableColumn="Update">Update </th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-Articles>
             <tr>
                 <td>{{Articles.title}}</td>
                 <td>{{Articles.content}}</td>
-                <p-button icon="pi pi-trash" styleClass="p-button-danger   " [disabled]="!Articles"
-                    (click)="OnDeleteArticle(Articles._id)"></p-button>
-                    <button pButton pRipple icon="pi pi-pencil" class="p-button-info m-2"
+                <td *ngIf="Articles.category">{{ Articles.category.name }}</td>
+                <td *ngIf="!Articles.category">NA</td>
+                <td> {{ Articles.CreatedAt | date: 'yyyy-MM-dd' }} </td>
+                <td>
+                    <button pButton pRipple type="button" icon="pi pi-trash"
+                        (click)="OnconfirmForDelete($event, Articles._id, Articles.title)"
+                        class="p-button-danger"></button>
+                </td>
+                <button pButton pRipple icon="pi pi-pencil" class="p-button-info m-2"
                     (click)="openUpdateModal(Articles)"></button>
 
 
@@ -47,3 +60,4 @@
 </div>
 <p-toast></p-toast>
 <app-update-article></app-update-article>
+<p-confirmPopup></p-confirmPopup>

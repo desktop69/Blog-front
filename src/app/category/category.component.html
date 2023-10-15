@@ -1,0 +1,51 @@
+<div class="card">
+    <p-toolbar styleClass="p-mb-4">
+        <ng-template pTemplate="left">
+            <p-button label="Add Category" icon="pi pi-plus" iconPos="right" (click)="openAddModal()"> </p-button>
+        </ng-template>
+        <div class="p-2 ">
+            <h3><b>Manage categories</b></h3>
+        </div>
+    </p-toolbar>
+    
+    <p-table #dt [value]="categories" [rows]="10" [paginator]="true" [globalFilterFields]="['title', ]"
+        [rowHover]="true" dataKey="_id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [showCurrentPageReport]="true">
+        <ng-template pTemplate="caption">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                <h4 class="p-m-0"><b>List Category</b></h4>
+                <span class="p-input-icon-left mt-3">
+                    <input pInputText type="text" (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+                        placeholder="Global Search" />
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="title">title <p-sortIcon field="title"></p-sortIcon></th>
+                <th pSortableColumn="content">content <p-sortIcon field="content"></p-sortIcon></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-categories>
+            <tr>
+                <td>{{categories.name}}</td>
+                <td>
+                    <button pButton pRipple type="button" icon="pi pi-trash"
+                        (click)="OnconfirmForDelete($event, categories._id, categories.name)"
+                        class="p-button-danger"></button>
+                </td>
+                <button pButton pRipple icon="pi pi-pencil" class="p-button-info m-2"
+                    (click)="openUpdateModal(categories)"></button>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                In total there are {{categories ? categories.length : 0 }} categories.
+            </div>
+        </ng-template>
+    </p-table>
+</div>
+<p-toast></p-toast>
+<app-update-category></app-update-category>
+<app-add-category></app-add-category>
+<p-confirmPopup></p-confirmPopup>

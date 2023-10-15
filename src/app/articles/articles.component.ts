@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ArticleService } from '../services/article.service';
 import { Article } from '../models/Article.model';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { UpdateArticleComponent } from '../update-article/update-article.component';
+import { AddArticleComponent } from '../add-article/add-article.component';
+import { ArticleNotificationService } from '../services/article-notification.service';
 
 
 @Component({
@@ -13,13 +15,20 @@ import { UpdateArticleComponent } from '../update-article/update-article.compone
 export class ArticlesComponent implements OnInit {
   Articles!: Article[];
   @ViewChild(UpdateArticleComponent) updateComponent!: UpdateArticleComponent;
+  @ViewChild(AddArticleComponent) addComponent!: AddArticleComponent;
   constructor(private services: ArticleService,
-    private messageService: MessageService
-  ) { }
+    private messageService: MessageService,
+    private articleNotificationService: ArticleNotificationService,
+    private confirmationService: ConfirmationService
+  ) {
+    this.articleNotificationService.articleAdded$.subscribe(() => {
+      this.GetAllArticle();
+    });
+  }
 
   ngOnInit(): void {
     this.GetAllArticle();
-    
+
   }
   GetAllArticle() {
     this.services.Get().subscribe(res => {
@@ -32,17 +41,42 @@ export class ArticlesComponent implements OnInit {
       console.log("delete", res);
       if (res) {
         this.GetAllArticle();
-           this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Image deleted successfully', life: 3000 });
-      } else {
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error Deleting  image', life: 3000 });
       }
     })
 
   }
 
-  openUpdateModal(app_obj :Article) {
+  openUpdateModal(app_obj: Article) {
     this.updateComponent.loadDataforUpdate(app_obj);
   }
+  openAddModal() {
+    this.addComponent.showModalDialog();
+  }
+  OnconfirmForDelete(event: Event, id: string, title: string) {
+    this.confirmationService.confirm({
+      target: event.target!,
+      message: "Are you sure that you want to Delete this Article ?",
+      icon: "pi pi-exclamation-triangle",
+      acceptButtonStyleClass: "",
+      rejectButtonStyleClass: "",
+      accept: () => {
+        this.OnDeleteArticle(id);
+        this.messageService.add({
+          severity: "info",
+          summary: "Success",
+          detail: ("You have successfully deleted  " + title),
+        });
+      },
+      reject: () => {
+        this.messageService.add({
+          severity: "error",
+          summary: "Rejected",
+          detail: ("You have rejected Deleting " + title),
+        });
+      }
+    });
+  }
+
 
 
 }

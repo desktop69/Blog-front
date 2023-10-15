@@ -15,12 +15,24 @@ import { MessageService } from 'primeng/api';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UpdateArticleComponent } from './update-article/update-article.component';
 import { DialogModule } from 'primeng/dialog';
+import { CategoryComponent } from './category/category.component';
+import { DropdownModule } from 'primeng/dropdown';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { ConfirmationService } from 'primeng/api';
+import { AddCategoryComponent } from './add-category/add-category.component';
+import { UpdateCategoryComponent } from './update-category/update-category.component';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import {EditorModule} from 'primeng/editor';
 @NgModule({
   declarations: [
     AppComponent,
     ArticlesComponent,
     AddArticleComponent,
-    UpdateArticleComponent
+    UpdateArticleComponent,
+    CategoryComponent,
+    AddCategoryComponent,
+    UpdateCategoryComponent
   ],
   imports: [
     BrowserModule,
@@ -34,10 +46,16 @@ import { DialogModule } from 'primeng/dialog';
     ToastModule,
     MessageModule,
     BrowserAnimationsModule,
-    DialogModule
+    DialogModule,
+    DropdownModule,
+    ConfirmPopupModule,
+    InputTextModule,
+    InputTextareaModule,
+    EditorModule
+
 
   ],
-  providers: [MessageService],
+  providers: [MessageService, ConfirmationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

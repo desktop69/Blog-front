@@ -1,5 +1,5 @@
 <!-- crate new dialoge for put request ? -->
-<p-dialog class='custom-close-button' header="Add Article" [(visible)]="displayModal" [modal]="true"
+<p-dialog class='custom-close-button' header="Add Category" [(visible)]="displayModal" [modal]="true"
     [style]="{height :'30vw',width:'55vw'}" [baseZIndex]="10000" [draggable]="true" [resizable]="true"
     [closable]="false">
     <!--  put ur conetent here   -->
@@ -12,33 +12,16 @@
                     <div class="container">
 
                         <div class="row">
-                            <form [formGroup]="articleForm" (ngSubmit)="onSubmit()">
-
-
-                                <div class="row">
-                                    <div class="col">
-                                        <label for="title">Title</label> <br>
-                                        <input id="title" type="text" pInputText formControlName="title" />
-                                    </div>
-                                    <div class="col">
-                                        <label for="category">Category</label>
-                                        <p-dropdown id="category" [options]="categories" formControlName="category"
-                                            [optionLabel]="'name'"></p-dropdown>
-                                    </div>
+                            <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
+                                <div class="p-field">
+                                    <label for="name">Title</label>
+                                    <input id="name" type="text" pInputText formControlName="name" />
                                 </div>
-                                <div class="col-4 mt-5">
-                                    <label for="content">Content</label>
-                                    <textarea id="content" pInputTextarea formControlName="content"></textarea>
-
-                                </div>
-
                             </form>
                         </div>
-
                     </div>
                 </div>
             </div>
-
             <!--end of card -->
         </div>
     </div>
