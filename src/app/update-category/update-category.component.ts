@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Category } from '../models/Category.model';
 import { CategoryService } from '../services/category.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-update-category',
@@ -13,7 +14,7 @@ export class UpdateCategoryComponent implements OnInit {
   displayModal!: boolean;
   displayPosition!: boolean;
   position!: string;
-  constructor(private services: CategoryService) { }
+  constructor(private services: CategoryService, private messageService: MessageService) { }
 
   ngOnInit(): void {
   }
@@ -51,6 +52,7 @@ export class UpdateCategoryComponent implements OnInit {
   onSubmit(): void {
     if (this.app_obj && this.app_obj._id) {
       this.updateCategory(this.app_obj._id, this.app_obj);
+      this.messageService.add({ severity: 'success', summary: 'Service Message', detail: 'Category Updated successfully' });
     }
     this.closeAllModals()
   }

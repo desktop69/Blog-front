@@ -3,6 +3,7 @@ import { Article } from '../models/Article.model';
 import { ArticleService } from '../services/article.service';
 import { CategoryService } from '../services/category.service';
 import { Category } from '../models/Category.model';
+import { MessageService } from 'primeng/api';
 
 
 @Component({
@@ -17,17 +18,17 @@ export class UpdateArticleComponent implements OnInit {
   position!: string;
   categories!: Category[];
   constructor(private services: ArticleService,
-    
+    private messageService: MessageService,
     private categoryService: CategoryService,) { }
 
 
   ngOnInit(): void {
-    
+
   }
   loadDataforUpdate(data: Article) {
     this.app_obj = data;
-    
-      
+
+
     // console.log("hey from update component child: " + this.app_obj.title);
     this.GetAllCategory();
     this.showModalDialog();
@@ -55,12 +56,13 @@ export class UpdateArticleComponent implements OnInit {
   onSubmit(): void {
     if (this.app_obj && this.app_obj._id) {
       this.updateArticle(this.app_obj._id, this.app_obj);
+      this.messageService.add({ severity: 'success', summary: 'Service Message', detail: 'Article Updated successfully' });
     }
     this.closeAllModals()
   }
   updateArticle(id: string, article: Article) {
     this.services.updateArticle(id, article).subscribe(data => {
-      console.log("data updated", data);
+      // console.log("data updated", data);
     })
   }
   GetAllCategory() {

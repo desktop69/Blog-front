@@ -29,4 +29,8 @@ export class ArticleService {
   updateArticle(id: string, article: Article): Observable<Article> {
     return this.http.put<Article>(`${this.apiUrl}/${id}`, article);
   }
+  findByCategory(Id: string): Observable<Article[]> {
+    const url = `${this.apiUrl}/by-category/${Id}`;
+    return this.http.get<Article[]>(url);
+  }
 }

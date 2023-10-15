@@ -1,6 +1,6 @@
 <!-- crate new dialoge for put request ? -->
-<p-dialog class='custom-close-button' header="Update candidature" [(visible)]="displayModal" [modal]="true"
-    [style]="{height :'30vw',width:'55vw'}" [baseZIndex]="10000" [draggable]="true" [resizable]="true"
+<p-dialog class='custom-close-button' header="Update Category" [(visible)]="displayModal" [modal]="true"
+    [style]="{height :'20vw',width:'30vw'}" [baseZIndex]="10000" [draggable]="true" [resizable]="true"
     [closable]="false">
     <!--  put ur conetent here   -->
     <div class="container" #container>
@@ -12,12 +12,10 @@
                     <div class="container">
 
                         <div class="row">
-                            <div class="col-md-6" *ngIf="app_obj">
-                                <label for="name">Name</label>
+                            <div class="col" *ngIf="app_obj">
+                                <label for="name">Name :</label><br>
                                 <input type="text" id="name" [(ngModel)]="app_obj.name" name="title" pInputText />
                             </div>
-                            
-                     
                         </div>
 
                     </div>

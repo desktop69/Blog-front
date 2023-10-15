@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ArticlesComponent } from './articles/articles.component';
 import { AddArticleComponent } from './add-article/add-article.component';
 import { CategoryComponent } from './category/category.component';
+import { SearchArticlesComponent } from './search-articles/search-articles.component';
 
 const routes: Routes = [
   {
@@ -10,6 +11,9 @@ const routes: Routes = [
   },
   {
     path: 'category', component: CategoryComponent,
+  },
+  {
+    path: 'search', component: SearchArticlesComponent,
   }
 ];
 

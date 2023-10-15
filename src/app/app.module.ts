@@ -24,6 +24,7 @@ import { UpdateCategoryComponent } from './update-category/update-category.compo
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import {EditorModule} from 'primeng/editor';
+import { SearchArticlesComponent } from './search-articles/search-articles.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +33,8 @@ import {EditorModule} from 'primeng/editor';
     UpdateArticleComponent,
     CategoryComponent,
     AddCategoryComponent,
-    UpdateCategoryComponent
+    UpdateCategoryComponent,
+    SearchArticlesComponent
   ],
   imports: [
     BrowserModule,

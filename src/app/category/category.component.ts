@@ -51,7 +51,7 @@ export class CategoryComponent implements OnInit {
   OnconfirmForDelete(event: Event, id: string, name: string) {
     this.confirmationService.confirm({
       target: event.target!,
-      message: "Are you sure that you want to Delete this Article ?",
+      message: "Are you sure that you want to Delete this Category ?",
       icon: "pi pi-exclamation-triangle",
       accept: () => {
         this.OnDeletecategory(id);

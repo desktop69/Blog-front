@@ -1,0 +1,51 @@
+<app-add-article></app-add-article>
+<div class="card">
+    <p-toolbar styleClass="p-mb-4">
+        <ng-template pTemplate="left">
+            <label for="category">Category</label>
+            <p-dropdown id="category" [optionValue]="'_id'" [options]="categories" name="category" [optionLabel]="'name'"
+                [(ngModel)]="selectedCategory" (onChange)="GetArticleByCategoryId()" defaultLabel="Select a category">
+              
+            </p-dropdown>
+        </ng-template>
+        <div class="p-2 ">
+            <h3><b>Manage Articles</b></h3>
+        </div>
+    </p-toolbar>
+    <p-table #dt [value]="Articles" [rows]="10" [paginator]="true" [globalFilterFields]="['title', ]" [rowHover]="true"
+        dataKey="_id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [showCurrentPageReport]="true">
+        <ng-template pTemplate="caption">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                <h4 class="p-m-0"><b>List Articles</b></h4>
+                <span class="p-input-icon-left mt-3">
+                    <input pInputText type="text" (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+                        placeholder="Global Search" />
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="title">Title <p-sortIcon field="title"></p-sortIcon></th>
+                <th pSortableColumn="content">Content <p-sortIcon field="content"></p-sortIcon></th>
+                <th pSortableColumn="category">Category <p-sortIcon field="category"></p-sortIcon></th>
+                <th pSortableColumn="CreatedAt">CreatedAt <p-sortIcon field="CreatedAt"></p-sortIcon></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-Articles>
+            <tr>
+                <td>{{Articles.title}}</td>
+                <td>{{Articles.content}}</td>
+                <td *ngIf="Articles.category">{{ Articles.category.name }}</td>
+                <td *ngIf="!Articles.category">NA</td>
+                <td> {{ Articles.CreatedAt | date: 'yyyy-MM-dd' }} </td>
+                <td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                In total there are {{Articles ? Articles.length : 0 }} Articles.
+            </div>
+        </ng-template>
+    </p-table>
+</div>

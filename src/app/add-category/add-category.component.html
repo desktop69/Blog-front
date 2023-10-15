@@ -1,6 +1,6 @@
 <!-- crate new dialoge for put request ? -->
 <p-dialog class='custom-close-button' header="Add Category" [(visible)]="displayModal" [modal]="true"
-    [style]="{height :'30vw',width:'55vw'}" [baseZIndex]="10000" [draggable]="true" [resizable]="true"
+    [style]="{height :'20vw',width:'30vw'}" [baseZIndex]="10000" [draggable]="true" [resizable]="true"
     [closable]="false">
     <!--  put ur conetent here   -->
     <div class="container" #container>
@@ -13,8 +13,8 @@
 
                         <div class="row">
                             <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
-                                <div class="p-field">
-                                    <label for="name">Title</label>
+                                <div class="col">
+                                    <label for="name">Name :</label> <br>
                                     <input id="name" type="text" pInputText formControlName="name" />
                                 </div>
                             </form>

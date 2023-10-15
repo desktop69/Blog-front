@@ -5,6 +5,7 @@ import { Article } from '../models/Article.model';
 import { CategoryService } from '../services/category.service';
 import { Category } from '../models/Category.model';
 import { ArticleNotificationService } from '../services/article-notification.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-add-article',
@@ -20,7 +21,8 @@ export class AddArticleComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private articleService: ArticleService,
     private categoryService: CategoryService,
-    private articleNotificationService: ArticleNotificationService) {
+    private messageService: MessageService,
+      private articleNotificationService: ArticleNotificationService) {
   }
   GetAllCategory() {
     this.categoryService.getAll().subscribe((res) => {
@@ -37,8 +39,8 @@ export class AddArticleComponent implements OnInit {
        
         // Notify the ArticlesComponent that an article has been added
         this.articleNotificationService.notifyArticleAdded();
-        // redirect to the article
         this.closeAllModals()
+        this.messageService.add({severity:'success', summary:'Service Message', detail:'Article added successfully'});
       });
     }
   }

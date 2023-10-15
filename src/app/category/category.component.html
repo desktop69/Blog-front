@@ -4,11 +4,11 @@
             <p-button label="Add Category" icon="pi pi-plus" iconPos="right" (click)="openAddModal()"> </p-button>
         </ng-template>
         <div class="p-2 ">
-            <h3><b>Manage categories</b></h3>
+            <h3><b>Manage Categories</b></h3>
         </div>
     </p-toolbar>
-    
-    <p-table #dt [value]="categories" [rows]="10" [paginator]="true" [globalFilterFields]="['title', ]"
+
+    <p-table #dt [value]="categories" [rows]="10" [paginator]="true" [globalFilterFields]="['name', ]"
         [rowHover]="true" dataKey="_id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
         [showCurrentPageReport]="true">
         <ng-template pTemplate="caption">
@@ -22,8 +22,9 @@
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
-                <th pSortableColumn="title">title <p-sortIcon field="title"></p-sortIcon></th>
-                <th pSortableColumn="content">content <p-sortIcon field="content"></p-sortIcon></th>
+                <th pSortableColumn="name">Name <p-sortIcon field="title"></p-sortIcon></th>
+                <th pSortableColumn="delete">Delete</th>
+                <th pSortableColumn="update">Update</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-categories>
@@ -34,8 +35,11 @@
                         (click)="OnconfirmForDelete($event, categories._id, categories.name)"
                         class="p-button-danger"></button>
                 </td>
-                <button pButton pRipple icon="pi pi-pencil" class="p-button-info m-2"
-                    (click)="openUpdateModal(categories)"></button>
+                <td>
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-info m-2"
+                        (click)="openUpdateModal(categories)"></button>
+                </td>
+
             </tr>
         </ng-template>
         <ng-template pTemplate="summary">
